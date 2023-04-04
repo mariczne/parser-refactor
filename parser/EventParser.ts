@@ -7,23 +7,21 @@ import { SportEventParser } from "./SportEventParser";
 import { TennisEventParser } from "./TennisEventParser";
 import { VolleyballEventParser } from "./VolleyballEventParser";
 
-const SPORTS = {
-  SOCCER: "soccer",
-  VOLLEYBALL: "volleyball",
-  HANDBALL: "handball",
-  BASKETBALL: "basketball",
-  TENNIS: "tennis",
-} as const;
-
-type Sport = typeof SPORTS[keyof typeof SPORTS];
+export enum Sport {
+  SOCCER = "soccer",
+  VOLLEYBALL = "volleyball",
+  HANDBALL = "handball",
+  BASKETBALL = "basketball",
+  TENNIS = "tennis",
+} ;
 
 export class EventParser {
   private PARSERS_MAP: Record<Sport, SportEventParser> = {
-    [SPORTS.SOCCER]: new SoccerEventParser,
-    [SPORTS.BASKETBALL]: new BasketballEventParser,
-    [SPORTS.HANDBALL]: new HandballEventParser,
-    [SPORTS.TENNIS]: new TennisEventParser,
-    [SPORTS.VOLLEYBALL]: new VolleyballEventParser,
+    [Sport.SOCCER]: new SoccerEventParser,
+    [Sport.BASKETBALL]: new BasketballEventParser,
+    [Sport.HANDBALL]: new HandballEventParser,
+    [Sport.TENNIS]: new TennisEventParser,
+    [Sport.VOLLEYBALL]: new VolleyballEventParser,
   };
   private parser: SportEventParser;
 
