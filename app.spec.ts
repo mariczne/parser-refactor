@@ -1,4 +1,5 @@
-import { EventParser, matches } from "./app";
+import { EventParser } from "./parser/EventParser";
+import { matches } from "./app";
 
 test("should correctly parse the example input", () => {
   const exampleOutput = [
