@@ -14,9 +14,7 @@ export class EventScoreFormatter {
   formatEventScore(event: { sport: string; score?: string | string[][] }) {
     switch (event.sport) {
       case Sport.BASKETBALL:
-        return this.basketballLikeFormattingStrategy.formatEventScore(
-          event.score
-        );
+        return this.basketballLikeFormattingStrategy.formatEventScore(event.score);
       case Sport.SOCCER:
       case Sport.HANDBALL:
         return this.soccerLikeFormattingStrategy.formatEventScore(event.score);
@@ -29,7 +27,11 @@ export class EventScoreFormatter {
   }
 }
 
-const basketballLikeFormattingStrategy = new BasketballLikeScoreFormattingStrategy()
-const soccerLikeFormattingStrategy = new SoccerLikeScoreFormattingStrategy()
-const tennisLikeFormattingStrategy = new TennisLikeScoreFormattingStrategy()
-export const eventScoreFormatter = new EventScoreFormatter(basketballLikeFormattingStrategy, soccerLikeFormattingStrategy, tennisLikeFormattingStrategy)
+const basketballLikeFormattingStrategy = new BasketballLikeScoreFormattingStrategy();
+const soccerLikeFormattingStrategy = new SoccerLikeScoreFormattingStrategy();
+const tennisLikeFormattingStrategy = new TennisLikeScoreFormattingStrategy();
+export const eventScoreFormatter = new EventScoreFormatter(
+  basketballLikeFormattingStrategy,
+  soccerLikeFormattingStrategy,
+  tennisLikeFormattingStrategy
+);

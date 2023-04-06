@@ -28,12 +28,12 @@ test("should correctly parse the example input", () => {
 
   for (const match of matches) {
     try {
-      const parsedEvent = eventParser.parseEvent(match)
+      const parsedEvent = eventParser.parseEvent(match);
       matchesParsed.push(parsedEvent);
     } catch {}
   }
 
   console.log(matchesParsed);
-  
+
   expect(matchesParsed).toEqual(exampleOutput);
 });

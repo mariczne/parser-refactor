@@ -49,7 +49,7 @@ let matchesParsed = [];
 
 for (const match of matches) {
   try {
-    const parsedEvent = eventParser.parseEvent(match)
+    const parsedEvent = eventParser.parseEvent(match);
     matchesParsed.push(parsedEvent);
   } catch {}
 }

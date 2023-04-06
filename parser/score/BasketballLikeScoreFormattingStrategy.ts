@@ -1,9 +1,7 @@
 import { IncorrectScoreFormatException } from "../../exceptions/IncorrectScoreFormatException";
 import { EventScoreFormattingStrategy } from "./EventScoreFormattingStrategy";
 
-export class BasketballLikeScoreFormattingStrategy
-  implements EventScoreFormattingStrategy
-{
+export class BasketballLikeScoreFormattingStrategy implements EventScoreFormattingStrategy {
   formatEventScore(score: string | string[][] | undefined): string {
     if (!Array.isArray(score)) throw new IncorrectScoreFormatException();
 

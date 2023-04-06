@@ -1,8 +1,5 @@
 import { eventNameCreator, EventNameCreator } from "./name/EventNameCreator";
-import {
-  eventScoreFormatter,
-  EventScoreFormatter,
-} from "./score/EventScoreFormatter";
+import { eventScoreFormatter, EventScoreFormatter } from "./score/EventScoreFormatter";
 
 export enum Sport {
   SOCCER = "soccer",
@@ -45,7 +42,4 @@ export class EventParser {
   }
 }
 
-export const eventParser = new EventParser(
-  eventNameCreator,
-  eventScoreFormatter
-);
+export const eventParser = new EventParser(eventNameCreator, eventScoreFormatter);
