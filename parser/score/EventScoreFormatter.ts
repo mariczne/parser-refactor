@@ -1,6 +1,6 @@
-import { InvalidSportException } from "../exceptions/InvalidSportException";
+import { InvalidSportException } from "../../exceptions/InvalidSportException";
 import { BasketballLikeScoreFormattingStrategy } from "./BasketballLikeScoreFormattingStrategy";
-import { Sport } from "./EventParser";
+import { Sport } from "../EventParser";
 import { SoccerLikeScoreFormattingStrategy } from "./SoccerLikeScoreFormattingStrategy";
 import { TennisLikeScoreFormattingStrategy } from "./TennisLikeScoreFormattingStrategy";
 
@@ -28,3 +28,8 @@ export class EventScoreFormatter {
     }
   }
 }
+
+const basketballLikeFormattingStrategy = new BasketballLikeScoreFormattingStrategy()
+const soccerLikeFormattingStrategy = new SoccerLikeScoreFormattingStrategy()
+const tennisLikeFormattingStrategy = new TennisLikeScoreFormattingStrategy()
+export const eventScoreFormatter = new EventScoreFormatter(basketballLikeFormattingStrategy, soccerLikeFormattingStrategy, tennisLikeFormattingStrategy)

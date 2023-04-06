@@ -1,7 +1,7 @@
-import { InvalidSportException } from "../exceptions/InvalidSportException";
-import { NoParticipantException } from "../exceptions/NoParticipantException";
+import { InvalidSportException } from "../../exceptions/InvalidSportException";
+import { NoParticipantException } from "../../exceptions/NoParticipantException";
 import { DashNamingStrategy } from "./DashNamingStrategy";
-import { EventLike, Sport } from "./EventParser";
+import { EventLike, Sport } from "../EventParser";
 import { VersusNamingStrategy } from "./VersusNamingStrategy";
 
 
@@ -33,3 +33,7 @@ export class EventNameCreator {
     }
   }
 }
+
+const versusNamingStrategy = new VersusNamingStrategy()
+const dashNamingStrategy = new DashNamingStrategy()
+export const eventNameCreator = new EventNameCreator(dashNamingStrategy, versusNamingStrategy)

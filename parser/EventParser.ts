@@ -1,12 +1,8 @@
-import { ParseableMatch } from "../app";
-import { InvalidSportException } from "../exceptions/InvalidSportException";
-import { BasketballLikeScoreFormattingStrategy } from "./BasketballLikeScoreFormattingStrategy";
-import { DashNamingStrategy } from "./DashNamingStrategy";
-import { EventNameCreator } from "./EventNameCreator";
-import { EventScoreFormatter } from "./EventScoreFormatter";
-import { SoccerLikeScoreFormattingStrategy } from "./SoccerLikeScoreFormattingStrategy";
-import { TennisLikeScoreFormattingStrategy } from "./TennisLikeScoreFormattingStrategy";
-import { VersusNamingStrategy } from "./VersusNamingStrategy";
+import { eventNameCreator, EventNameCreator } from "./name/EventNameCreator";
+import {
+  eventScoreFormatter,
+  EventScoreFormatter,
+} from "./score/EventScoreFormatter";
 
 export enum Sport {
   SOCCER = "soccer",
@@ -37,7 +33,7 @@ export class EventParser {
   // private validateSport(sport: unknown): sport is Sport {
   //   if (!Object.values(Sport).includes(sport as Sport)) throw new InvalidSportException()
   //   return true
-  // } 
+  // }
 
   parseEvent(event: EventLike): ParsedEvent {
     // this.validateSport(event.sport)
@@ -49,13 +45,7 @@ export class EventParser {
   }
 }
 
-const versusNamingStrategy = new VersusNamingStrategy()
-const dashNamingStrategy = new DashNamingStrategy()
-const eventNameCreator = new EventNameCreator(dashNamingStrategy, versusNamingStrategy)
-
-const basketballLikeFormattingStrategy = new BasketballLikeScoreFormattingStrategy()
-const soccerLikeFormattingStrategy = new SoccerLikeScoreFormattingStrategy()
-const tennisLikeFormattingStrategy = new TennisLikeScoreFormattingStrategy()
-const eventScoreFormatter = new EventScoreFormatter(basketballLikeFormattingStrategy, soccerLikeFormattingStrategy, tennisLikeFormattingStrategy)
-
-export const eventParser = new EventParser(eventNameCreator, eventScoreFormatter)
+export const eventParser = new EventParser(
+  eventNameCreator,
+  eventScoreFormatter
+);

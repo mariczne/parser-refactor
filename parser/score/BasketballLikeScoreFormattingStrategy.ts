@@ -1,4 +1,4 @@
-import { IncorrectScoreFormatException } from "../exceptions/IncorrectScoreFormatException";
+import { IncorrectScoreFormatException } from "../../exceptions/IncorrectScoreFormatException";
 import { EventScoreFormattingStrategy } from "./EventScoreFormattingStrategy";
 
 export class BasketballLikeScoreFormattingStrategy
