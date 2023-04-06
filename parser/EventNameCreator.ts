@@ -1,0 +1,35 @@
+import { InvalidSportException } from "../exceptions/InvalidSportException";
+import { NoParticipantException } from "../exceptions/NoParticipantException";
+import { DashNamingStrategy } from "./DashNamingStrategy";
+import { EventLike, Sport } from "./EventParser";
+import { VersusNamingStrategy } from "./VersusNamingStrategy";
+
+
+export class EventNameCreator {
+  constructor(
+    private readonly dashNamingStrategy: DashNamingStrategy,
+    private readonly versusNamingStrategy: VersusNamingStrategy
+  ) {}
+
+  getEventName(event: EventLike) {
+    if (!event.participant1 || !event.participant2) throw new NoParticipantException();
+
+    switch (event.sport) {
+      case Sport.BASKETBALL:
+      case Sport.SOCCER:
+      case Sport.VOLLEYBALL:
+        return this.dashNamingStrategy.getEventName(
+          event.participant1,
+          event.participant2
+        );
+      case Sport.TENNIS:
+      case Sport.HANDBALL:
+        return this.versusNamingStrategy.getEventName(
+          event.participant1,
+          event.participant2
+        );
+      default:
+        throw new InvalidSportException();
+    }
+  }
+}

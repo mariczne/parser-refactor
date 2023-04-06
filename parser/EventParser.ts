@@ -1,11 +1,12 @@
 import { ParseableMatch } from "../app";
 import { InvalidSportException } from "../exceptions/InvalidSportException";
-import { BasketballEventParser } from "./BasketballEventParser";
-import { HandballEventParser } from "./HandballEventParser";
-import { SoccerEventParser } from "./SoccerEventParser";
-import { SportEventParser } from "./SportEventParser";
-import { TennisEventParser } from "./TennisEventParser";
-import { VolleyballEventParser } from "./VolleyballEventParser";
+import { BasketballLikeScoreFormattingStrategy } from "./BasketballLikeScoreFormattingStrategy";
+import { DashNamingStrategy } from "./DashNamingStrategy";
+import { EventNameCreator } from "./EventNameCreator";
+import { EventScoreFormatter } from "./EventScoreFormatter";
+import { SoccerLikeScoreFormattingStrategy } from "./SoccerLikeScoreFormattingStrategy";
+import { TennisLikeScoreFormattingStrategy } from "./TennisLikeScoreFormattingStrategy";
+import { VersusNamingStrategy } from "./VersusNamingStrategy";
 
 export enum Sport {
   SOCCER = "soccer",
@@ -13,33 +14,48 @@ export enum Sport {
   HANDBALL = "handball",
   BASKETBALL = "basketball",
   TENNIS = "tennis",
-} ;
+}
+
+export type EventLike = {
+  participant1?: string;
+  participant2?: string;
+  score?: string | string[][];
+  sport: string;
+};
+
+export type ParsedEvent = {
+  name: string;
+  score: string;
+};
 
 export class EventParser {
-  private PARSERS_MAP: Record<Sport, SportEventParser> = {
-    [Sport.SOCCER]: new SoccerEventParser,
-    [Sport.BASKETBALL]: new BasketballEventParser,
-    [Sport.HANDBALL]: new HandballEventParser,
-    [Sport.TENNIS]: new TennisEventParser,
-    [Sport.VOLLEYBALL]: new VolleyballEventParser,
-  };
-  private parser: SportEventParser;
+  constructor(
+    private readonly eventNameCreator: EventNameCreator,
+    private readonly eventScoreFormatter: EventScoreFormatter
+  ) {}
 
-  constructor(private readonly match: ParseableMatch) {
-    this.parser = this.getParser();
-  }
+  // private validateSport(sport: unknown): sport is Sport {
+  //   if (!Object.values(Sport).includes(sport as Sport)) throw new InvalidSportException()
+  //   return true
+  // } 
 
-  getParser() {
-    const parser = this.PARSERS_MAP[this.match.sport as Sport];
-    if (!parser) throw new InvalidSportException();
-    return parser;
-  }
+  parseEvent(event: EventLike): ParsedEvent {
+    // this.validateSport(event.sport)
 
-  makeEventName() {
-    return this.parser.makeEventName(this.match);
-  }
-
-  formatScore() {
-    return this.parser.formatScore(this.match);
+    return {
+      name: this.eventNameCreator.getEventName(event),
+      score: this.eventScoreFormatter.formatEventScore(event),
+    };
   }
 }
+
+const versusNamingStrategy = new VersusNamingStrategy()
+const dashNamingStrategy = new DashNamingStrategy()
+const eventNameCreator = new EventNameCreator(dashNamingStrategy, versusNamingStrategy)
+
+const basketballLikeFormattingStrategy = new BasketballLikeScoreFormattingStrategy()
+const soccerLikeFormattingStrategy = new SoccerLikeScoreFormattingStrategy()
+const tennisLikeFormattingStrategy = new TennisLikeScoreFormattingStrategy()
+const eventScoreFormatter = new EventScoreFormatter(basketballLikeFormattingStrategy, soccerLikeFormattingStrategy, tennisLikeFormattingStrategy)
+
+export const eventParser = new EventParser(eventNameCreator, eventScoreFormatter)

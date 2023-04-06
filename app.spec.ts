@@ -1,4 +1,4 @@
-import { EventParser } from "./parser/EventParser";
+import { eventParser } from "./parser/EventParser";
 import { matches } from "./app";
 
 test("should correctly parse the example input", () => {
@@ -28,14 +28,8 @@ test("should correctly parse the example input", () => {
 
   for (const match of matches) {
     try {
-      const parser = new EventParser(match);
-      const name = parser.makeEventName();
-      const score = parser.formatScore();
-
-      matchesParsed.push({
-        name,
-        score,
-      });
+      const parsedEvent = eventParser.parseEvent(match)
+      matchesParsed.push(parsedEvent);
     } catch {}
   }
 
