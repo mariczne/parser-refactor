@@ -1,8 +1,8 @@
 import { IncorrectScoreFormatException } from "../../exceptions/IncorrectScoreFormatException";
-import { EventScoreFormattingStrategy } from "./EventScoreFormattingStrategy";
+import { MatchScoreFormattingStrategy } from "./MatchScoreFormattingStrategy";
 
-export class TennisLikeScoreFormattingStrategy implements EventScoreFormattingStrategy {
-  formatEventScore(score: string | string[][] | undefined): string {
+export class SetsScoreFormattingStrategy implements MatchScoreFormattingStrategy {
+  formatMatchScore(score: string | string[][] | undefined): string {
     if (typeof score !== "string") throw new IncorrectScoreFormatException();
 
     const scores = /([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+)/.exec(score);

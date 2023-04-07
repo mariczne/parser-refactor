@@ -1,7 +1,7 @@
-import { EventNamingStrategy } from "./EventNamingStrategy";
+import { MatchNamingStrategy } from "./MatchNamingStrategy";
 
-export class VersusNamingStrategy implements EventNamingStrategy {
-  getEventName(homePlayer: string, awayPlayer: string): string {
+export class VersusNamingStrategy implements MatchNamingStrategy {
+  getMatchName(homePlayer: string, awayPlayer: string): string {
     return homePlayer + " vs " + awayPlayer;
   }
 }

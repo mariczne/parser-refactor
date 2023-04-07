@@ -1,4 +1,4 @@
-import { eventParser } from "./parser/EventParser";
+import { matchParser } from "./parser/MatchParser";
 import { matches } from "./app";
 
 test("should correctly parse the example input", () => {
@@ -24,13 +24,13 @@ test("should correctly parse the example input", () => {
       score: "Main score: 2:1 (set1 7:6, set2 6:3, set3 6:7)",
     },
   ];
-  
+
   const matchesParsed = [];
 
   for (const match of matches) {
     try {
-      const parsedEvent = eventParser.parseEvent(match);
-      matchesParsed.push(parsedEvent);
+      const parsedMatch = matchParser.parseMatch(match);
+      matchesParsed.push(parsedMatch);
     } catch {}
   }
 

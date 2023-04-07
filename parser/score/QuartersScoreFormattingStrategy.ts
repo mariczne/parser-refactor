@@ -1,8 +1,8 @@
 import { IncorrectScoreFormatException } from "../../exceptions/IncorrectScoreFormatException";
-import { EventScoreFormattingStrategy } from "./EventScoreFormattingStrategy";
+import { MatchScoreFormattingStrategy } from "./MatchScoreFormattingStrategy";
 
-export class BasketballLikeScoreFormattingStrategy implements EventScoreFormattingStrategy {
-  formatEventScore(score: string | string[][] | undefined): string {
+export class QuartersScoreFormattingStrategy implements MatchScoreFormattingStrategy {
+  formatMatchScore(score: string | string[][] | undefined): string {
     if (!Array.isArray(score)) throw new IncorrectScoreFormatException();
 
     const [[Q1, Q2], [Q3, Q4]] = score;

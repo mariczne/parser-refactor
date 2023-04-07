@@ -1,4 +1,4 @@
-import { eventParser } from "./parser/EventParser";
+import { matchParser } from "./parser/MatchParser";
 
 export type ParseableMatch = { sport: string } & Partial<{
   participant1: string;
@@ -49,8 +49,8 @@ let matchesParsed = [];
 
 for (const match of matches) {
   try {
-    const parsedEvent = eventParser.parseEvent(match);
-    matchesParsed.push(parsedEvent);
+    const parsedMatch = matchParser.parseMatch(match);
+    matchesParsed.push(parsedMatch);
   } catch {}
 }
 
