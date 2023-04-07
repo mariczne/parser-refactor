@@ -2,7 +2,7 @@ import { eventParser } from "./parser/EventParser";
 import { matches } from "./app";
 
 test("should correctly parse the example input", () => {
-  const exampleOutput = [
+  const exampleOutput = [ // taken from readme
     {
       name: "Chelsea - Arsenal",
       score: "2:1",
@@ -24,6 +24,7 @@ test("should correctly parse the example input", () => {
       score: "Main score: 2:1 (set1 7:6, set2 6:3, set3 6:7)",
     },
   ];
+  
   const matchesParsed = [];
 
   for (const match of matches) {

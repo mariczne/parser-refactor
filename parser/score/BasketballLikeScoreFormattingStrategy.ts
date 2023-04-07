@@ -6,7 +6,7 @@ export class BasketballLikeScoreFormattingStrategy implements EventScoreFormatti
     if (!Array.isArray(score)) throw new IncorrectScoreFormatException();
 
     const [[Q1, Q2], [Q3, Q4]] = score;
-    // Not showing the total score of a basketball game is a bit weird, though
+    // Not showing the total score of a basketball game is a bit weird
     return Q1 + "," + Q2 + "," + Q3 + "," + Q4;
   }
 }

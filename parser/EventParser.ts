@@ -27,14 +27,7 @@ export class EventParser {
     private readonly eventScoreFormatter: EventScoreFormatter
   ) {}
 
-  // private validateSport(sport: unknown): sport is Sport {
-  //   if (!Object.values(Sport).includes(sport as Sport)) throw new InvalidSportException()
-  //   return true
-  // }
-
   parseEvent(event: EventLike): ParsedEvent {
-    // this.validateSport(event.sport)
-
     return {
       name: this.eventNameCreator.getEventName(event),
       score: this.eventScoreFormatter.formatEventScore(event),
@@ -42,4 +35,5 @@ export class EventParser {
   }
 }
 
+// I won't be mocking anything, so this is fine
 export const eventParser = new EventParser(eventNameCreator, eventScoreFormatter);
